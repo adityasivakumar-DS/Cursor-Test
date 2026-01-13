@@ -4,11 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Component Library - Cursor Test</title>
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel Standalone for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        :root {
+            --color/text/accent: #cf0;
+            --color/text/primary: white;
+            --color/text/secondary: #9ca3af;
+            --color/bg/primary: #030712;
+            --color/bg/tertiary: #1f2937;
+            --fontsize/xs: 12px;
+            --fontsize/sm: 14px;
+            --fontsize/body: 16px;
+            --fontsize/h4: 24px;
+            --fontsize/h5: 20px;
+            --fontsize/h2: 36px;
+            --fontfamily/body: "Inter:Regular", sans-serif;
+            --spacing/m: 8px;
+            --spacing/lg: 12px;
+            --spacing/xl: 16px;
+            --spacing/2xl: 24px;
+            --grid/5-column: 546px;
         }
 
         body {
@@ -72,7 +99,7 @@
 
         .components-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
@@ -112,6 +139,19 @@
             border-radius: 12px;
             font-size: 0.75rem;
             font-weight: 600;
+        }
+
+        .component-preview {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
         .component-description {
@@ -244,358 +284,12 @@
             <input type="text" class="search-input" id="searchInput" placeholder="Search components...">
         </div>
 
-        <div class="components-grid" id="componentsGrid">
-            <!-- Button -->
-            <div class="component-card" data-name="button">
-                <div class="component-header">
-                    <div class="component-name">Button</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Primary, Secondary, and Hyperlink button variants with optional icons.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>type:</strong> "Primary" | "Secondary" | "Hyperlink"</li>
-                        <li><strong>icon:</strong> boolean</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/Button.tsx</div>
+        <div id="app-root">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search components...">
             </div>
-
-            <!-- Product Brand Rating -->
-            <div class="component-card" data-name="product brand rating">
-                <div class="component-header">
-                    <div class="component-name">Product Brand Rating</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Product branding with star ratings and wishlist functionality.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>wishlist:</strong> boolean</li>
-                        <li><strong>brandName:</strong> boolean</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/ProductBrandRating.tsx</div>
-            </div>
-
-            <!-- Icon with Text -->
-            <div class="component-card" data-name="icon with text">
-                <div class="component-header">
-                    <div class="component-name">Icon with Text</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Icon and text combinations for various UI elements.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>icon:</strong> boolean</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/IconWithText.tsx</div>
-            </div>
-
-            <!-- Card Selector -->
-            <div class="component-card" data-name="card selector">
-                <div class="component-header">
-                    <div class="component-name">Card Selector</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Selectable card components with icons and pricing information.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>state:</strong> boolean (active/inactive)</li>
-                        <li><strong>icon:</strong> boolean</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/CardSelector.tsx</div>
-            </div>
-
-            <!-- Size & Color Selector -->
-            <div class="component-card" data-name="size color selector">
-                <div class="component-header">
-                    <div class="component-name">Size & Color Selector</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Product size and color selection dropdowns with optional size chart link.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>sizeChart:</strong> boolean</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/SizeColorSelector.tsx</div>
-            </div>
-
-            <!-- Product Price -->
-            <div class="component-card" data-name="product price">
-                <div class="component-header">
-                    <div class="component-name">Product Price</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Price display component with strikeout and discount percentage options.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>price:</strong> string</li>
-                        <li><strong>strikeoutPrice:</strong> boolean</li>
-                        <li><strong>discountPercentage:</strong> boolean</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/ProductPrice.tsx</div>
-            </div>
-
-            <!-- Star Rating -->
-            <div class="component-card" data-name="star rating">
-                <div class="component-header">
-                    <div class="component-name">Star Rating</div>
-                    <div class="component-badge">Not Mapped*</div>
-                </div>
-                <div class="component-description">
-                    Star rating component with configurable rating (1-5 stars) and optional rating count.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>ratingCount:</strong> string</li>
-                        <li><strong>starRating:</strong> "1 star" | "2 star" | "3 star" | "4 star" | "5 star"</li>
-                        <li><strong>ratingCount1:</strong> boolean</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/StarRating.tsx</div>
-            </div>
-
-            <!-- Thumbnail Row -->
-            <div class="component-card" data-name="thumbnail row">
-                <div class="component-header">
-                    <div class="component-name">Thumbnail Row</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Row of product thumbnails supporting 3 or 4 items with active state.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>thumbnailCount:</strong> "3" | "4"</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/ThumbnailRow.tsx</div>
-            </div>
-
-            <!-- Angle Right -->
-            <div class="component-card" data-name="angle right">
-                <div class="component-header">
-                    <div class="component-name">Angle Right</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Right navigation arrow icon in multiple sizes (40x40, 48x48, 56x56) with active/inactive states.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>state:</strong> boolean</li>
-                        <li><strong>size:</strong> "40x40" | "48x48" | "56x56"</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/AngleRight.tsx</div>
-            </div>
-
-            <!-- Angle Left -->
-            <div class="component-card" data-name="angle left">
-                <div class="component-header">
-                    <div class="component-name">Angle Left</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Left navigation arrow icon in multiple sizes (40x40, 48x48, 56x56) with active/inactive states.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>state:</strong> boolean</li>
-                        <li><strong>size:</strong> "40x40" | "48x48" | "56x56"</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/AngleLeft.tsx</div>
-            </div>
-
-            <!-- Product Media Section -->
-            <div class="component-card" data-name="product media section">
-                <div class="component-header">
-                    <div class="component-name">Product Media Section</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Product image gallery with thumbnails and navigation arrows.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>nav:</strong> boolean</li>
-                        <li><strong>thumbnailCount:</strong> "3" | "4"</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/ProductMediaSection.tsx</div>
-            </div>
-
-            <!-- Thumbnail -->
-            <div class="component-card" data-name="thumbnail">
-                <div class="component-header">
-                    <div class="component-name">Thumbnail</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Individual thumbnail component with default and active states.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>property1:</strong> "Default" | "Active"</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/Thumbnail.tsx</div>
-            </div>
-
-            <!-- Utility Links -->
-            <div class="component-card" data-name="utility links">
-                <div class="component-header">
-                    <div class="component-name">Utility Links</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Utility link icons supporting 1-6 items in a row.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>utilityLinks:</strong> "1" | "2" | "3" | "4" | "5" | "6"</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/UtilityLinks.tsx</div>
-            </div>
-
-            <!-- Links -->
-            <div class="component-card" data-name="links">
-                <div class="component-header">
-                    <div class="component-name">Links</div>
-                    <div class="component-badge">Not Mapped*</div>
-                </div>
-                <div class="component-description">
-                    Link components with optional icons and text, supporting various combinations.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>icon:</strong> boolean</li>
-                        <li><strong>text:</strong> boolean</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/Links.tsx</div>
-            </div>
-
-            <!-- Nav Menu -->
-            <div class="component-card" data-name="nav menu">
-                <div class="component-header">
-                    <div class="component-name">Nav Menu</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Navigation menu component supporting 1-8 menu items.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>navMenuCount:</strong> "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8"</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/NavMenu.tsx</div>
-            </div>
-
-            <!-- Menu -->
-            <div class="component-card" data-name="menu">
-                <div class="component-header">
-                    <div class="component-name">Menu</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Individual menu item component with default and variant styles.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>property1:</strong> "Default" | "Variant2"</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/Menu.tsx</div>
-            </div>
-
-            <!-- Breadcrumbs -->
-            <div class="component-card" data-name="breadcrumbs">
-                <div class="component-header">
-                    <div class="component-name">Breadcrumbs</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Breadcrumb navigation component showing hierarchical navigation path.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li>No props (static component)</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/Breadcrumbs.tsx</div>
-            </div>
-
-            <!-- Header Base -->
-            <div class="component-card" data-name="header base">
-                <div class="component-header">
-                    <div class="component-name">Header Base</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Header component with logo alignment options (left or center) and navigation elements.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li><strong>logoAlign:</strong> "left" | "center"</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/HeaderBase.tsx</div>
-            </div>
-
-            <!-- Dropdown -->
-            <div class="component-card" data-name="dropdown">
-                <div class="component-header">
-                    <div class="component-name">Dropdown</div>
-                    <div class="component-badge">Mapped</div>
-                </div>
-                <div class="component-description">
-                    Dropdown select component with chevron icon indicator.
-                </div>
-                <div class="component-props">
-                    <div class="props-title">Props</div>
-                    <ul class="props-list">
-                        <li>No props (static component)</li>
-                    </ul>
-                </div>
-                <div class="file-path">src/components/Dropdown.tsx</div>
+            <div class="components-grid" id="componentsGrid">
+                <!-- Components will be rendered here -->
             </div>
         </div>
 
@@ -606,48 +300,612 @@
         </div>
     </div>
 
-    <script>
-        const searchInput = document.getElementById('searchInput');
-        const componentsGrid = document.getElementById('componentsGrid');
-        const componentCards = document.querySelectorAll('.component-card');
+    <script type="text/babel">
+        const { useState } = React;
 
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase().trim();
+        // Component definitions
+        const Button = ({ type = "Primary", icon = true }) => {
+            const isPrimary = type === "Primary";
+            const isSecondary = type === "Secondary";
+            const isHyperlink = type === "Hyperlink";
             
-            let visibleCount = 0;
-            
-            componentCards.forEach(card => {
-                const componentName = card.getAttribute('data-name').toLowerCase();
-                const description = card.querySelector('.component-description').textContent.toLowerCase();
-                const filePath = card.querySelector('.file-path').textContent.toLowerCase();
-                
-                const matches = componentName.includes(searchTerm) || 
-                               description.includes(searchTerm) || 
-                               filePath.includes(searchTerm);
-                
-                if (matches || searchTerm === '') {
-                    card.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
+            return (
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '12px 16px',
+                    borderRadius: '32px',
+                    backgroundColor: isPrimary ? '#cf0' : isHyperlink ? 'transparent' : 'transparent',
+                    border: isSecondary ? '1px solid #5514b4' : 'none',
+                    gap: icon ? '9px' : '0',
+                    color: isPrimary ? '#030712' : isSecondary || isHyperlink ? '#5514b4' : '#ffffff',
+                    textDecoration: isHyperlink ? 'underline' : 'none',
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    fontWeight: 'normal'
+                }}>
+                    {icon && <span style={{ fontSize: '14px' }}>✓</span>}
+                    <span>Button</span>
+                </div>
+            );
+        };
+
+        const ProductBrandRating = ({ wishlist = true, brandName = true }) => (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+                {(brandName || wishlist) && (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                        {brandName && <span style={{ fontSize: '12px', color: '#ffffff' }}>Brand name</span>}
+                        {wishlist && <span style={{ fontSize: '20px' }}>♡</span>}
+                    </div>
+                )}
+                <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                    {'★★★★★'.split('').map((star, i) => (
+                        <span key={i} style={{ color: '#ccff00', fontSize: '16px' }}>{star}</span>
+                    ))}
+                    <span style={{ fontSize: '16px', marginLeft: '4px' }}>786</span>
+                </div>
+            </div>
+        );
+
+        const IconWithText = ({ icon = true }) => (
+            <div style={{ display: 'flex', alignItems: 'center', gap: icon ? '0' : '8px' }}>
+                <span style={{ fontSize: '14px', color: '#ffffff' }}>To order</span>
+                {!icon && <span style={{ fontSize: '20px' }}>🚚</span>}
+            </div>
+        );
+
+        const CardSelector = ({ state = false, icon = true }) => (
+            <div style={{
+                background: '#1f2937',
+                border: state ? '1px solid white' : 'none',
+                borderRadius: '40px',
+                padding: '16px',
+                width: '130px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px'
+            }}>
+                {icon && (
+                    <div style={{
+                        background: 'white',
+                        borderRadius: '40px',
+                        padding: '8px',
+                        width: '40px',
+                        height: '40px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#030712',
+                        fontSize: '20px'
+                    }}>$</div>
+                )}
+                <div style={{ fontSize: '14px', color: '#ffffff' }}>To order</div>
+                <div style={{ fontSize: '20px', fontWeight: '600', color: '#ffffff' }}>$1,120</div>
+            </div>
+        );
+
+        const SizeColorSelector = ({ sizeChart = true }) => (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
+                {sizeChart && (
+                    <div style={{ fontSize: '16px', textDecoration: 'underline', color: '#ffffff' }}>Size chart</div>
+                )}
+                <div style={{ display: 'flex', gap: '16px' }}>
+                    <div style={{
+                        background: '#1f2937',
+                        borderRadius: '32px',
+                        padding: '12px 16px',
+                        flex: 1,
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                    }}>
+                        <span style={{ fontSize: '16px', color: '#ffffff' }}>Size</span>
+                        <span style={{ fontSize: '16px', color: '#ffffff' }}>▼</span>
+                    </div>
+                    <div style={{
+                        background: '#1f2937',
+                        borderRadius: '32px',
+                        padding: '12px 16px',
+                        flex: 1,
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                    }}>
+                        <span style={{ fontSize: '16px', color: '#ffffff' }}>Color</span>
+                        <span style={{ fontSize: '16px', color: '#ffffff' }}>▼</span>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const ProductPrice = ({ price = "$2,223", strikeoutPrice = false, discountPercentage = false }) => (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', height: '36px' }}>
+                <span style={{ fontSize: '36px', color: '#ffffff' }}>{price}</span>
+                {strikeoutPrice && (
+                    <>
+                        <span style={{ fontSize: '24px', textDecoration: 'line-through', color: '#9ca3af' }}>$2,223</span>
+                        {discountPercentage && <span style={{ fontSize: '24px', color: '#ffffff' }}>25%</span>}
+                    </>
+                )}
+            </div>
+        );
+
+        const StarRating = ({ ratingCount = "786", starRating = "5 star", ratingCount1 = true }) => {
+            const stars = parseInt(starRating);
+            return (
+                <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                    {[1, 2, 3, 4, 5].map(i => (
+                        <span key={i} style={{ color: i <= stars ? '#ccff00' : '#9ca3af', fontSize: '16px' }}>
+                            {i <= stars ? '★' : '☆'}
+                        </span>
+                    ))}
+                    {ratingCount1 && <span style={{ fontSize: '16px', marginLeft: '4px' }}>{ratingCount}</span>}
+                </div>
+            );
+        };
+
+        const ThumbnailRow = ({ thumbnailCount = "3" }) => (
+            <div style={{ display: 'flex', gap: '8px', width: '100%' }}>
+                {Array.from({ length: parseInt(thumbnailCount) }).map((_, i) => (
+                    <div key={i} style={{
+                        flex: 1,
+                        height: '60px',
+                        background: i === 0 ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                        borderRadius: '4px',
+                        border: i === 0 ? '2px solid white' : 'none'
+                    }} />
+                ))}
+            </div>
+        );
+
+        const AngleRight = ({ state = true, size = "56x56" }) => {
+            const sizeNum = parseInt(size.split('x')[0]);
+            return (
+                <div style={{
+                    width: `${sizeNum}px`,
+                    height: `${sizeNum}px`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: state ? '#ffffff' : '#9ca3af',
+                    fontSize: `${sizeNum * 0.5}px`
+                }}>
+                    →
+                </div>
+            );
+        };
+
+        const AngleLeft = ({ state = true, size = "56x56" }) => {
+            const sizeNum = parseInt(size.split('x')[0]);
+            return (
+                <div style={{
+                    width: `${sizeNum}px`,
+                    height: `${sizeNum}px`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: state ? '#ffffff' : '#9ca3af',
+                    fontSize: `${sizeNum * 0.5}px`
+                }}>
+                    ←
+                </div>
+            );
+        };
+
+        const ProductMediaSection = ({ nav = false, thumbnailCount = "3" }) => (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%' }}>
+                <div style={{
+                    width: '100%',
+                    height: '120px',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    borderRadius: '8px'
+                }} />
+                <ThumbnailRow thumbnailCount={thumbnailCount} />
+                {nav && (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px' }}>
+                        <AngleLeft size="40x40" />
+                        <AngleRight size="40x40" />
+                    </div>
+                )}
+            </div>
+        );
+
+        const Thumbnail = ({ property1 = "Default" }) => (
+            <div style={{
+                width: '100px',
+                height: '80px',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                borderRadius: '4px',
+                border: property1 === "Active" ? '2px solid white' : 'none'
+            }} />
+        );
+
+        const UtilityLinks = ({ utilityLinks = "1" }) => {
+            const count = parseInt(utilityLinks);
+            return (
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                    {Array.from({ length: count }).map((_, i) => (
+                        <div key={i} style={{
+                            width: '24px',
+                            height: '24px',
+                            background: '#1f2937',
+                            borderRadius: '4px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#ffffff',
+                            fontSize: '12px'
+                        }}>🔗</div>
+                    ))}
+                </div>
+            );
+        };
+
+        const Links = ({ icon = true, text = true }) => (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                {icon && <span style={{ fontSize: '20px' }}>🔗</span>}
+                {text && <span style={{ fontSize: '16px', color: '#ffffff' }}>Why choose us?</span>}
+            </div>
+        );
+
+        const NavMenu = ({ navMenuCount = "1" }) => {
+            const count = parseInt(navMenuCount);
+            return (
+                <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+                    {Array.from({ length: count }).map((_, i) => (
+                        <span key={i} style={{ fontSize: '16px', color: '#ffffff' }}>Home</span>
+                    ))}
+                </div>
+            );
+        };
+
+        const Menu = ({ property1 = "Default" }) => (
+            <div style={{ fontSize: '16px', color: '#ffffff', textDecoration: property1 === "Variant2" ? 'underline' : 'none' }}>
+                Home
+            </div>
+        );
+
+        const Breadcrumbs = () => (
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'center', fontSize: '12px', color: '#9ca3af' }}>
+                <span>Level 1</span>
+                <span>/</span>
+                <span>Level 2</span>
+                <span>/</span>
+                <span>Level 3</span>
+                <span>/</span>
+                <span>Level 4</span>
+            </div>
+        );
+
+        const HeaderBase = ({ logoAlign = "left" }) => (
+            <div style={{
+                background: '#030712',
+                padding: '24px 40px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '100%',
+                borderRadius: '8px'
+            }}>
+                <div style={{ fontSize: '16px', color: '#ffffff' }}>{logoAlign === "left" ? "LOGO" : "Menu Menu Menu Menu"}</div>
+                <div style={{ display: 'flex', gap: '16px' }}>
+                    <span style={{ fontSize: '16px', color: '#ffffff' }}>🔗</span>
+                    <span style={{ fontSize: '16px', color: '#ffffff' }}>🔗</span>
+                </div>
+            </div>
+        );
+
+        const Dropdown = () => (
+            <div style={{
+                background: '#1f2937',
+                borderRadius: '32px',
+                padding: '12px 16px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '100%'
+            }}>
+                <span style={{ fontSize: '16px', color: '#ffffff' }}>Field</span>
+                <span style={{ fontSize: '16px', color: '#ffffff' }}>▼</span>
+            </div>
+        );
+
+        // Component data
+        const components = [
+            {
+                name: "Button",
+                dataName: "button",
+                description: "Primary, Secondary, and Hyperlink button variants with optional icons.",
+                props: [
+                    { name: "type", type: '"Primary" | "Secondary" | "Hyperlink"' },
+                    { name: "icon", type: "boolean" }
+                ],
+                filePath: "src/components/Button.tsx",
+                mapped: true,
+                preview: <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}><Button type="Primary" icon={true} /><Button type="Secondary" icon={false} /><Button type="Hyperlink" icon={true} /></div>
+            },
+            {
+                name: "Product Brand Rating",
+                dataName: "product brand rating",
+                description: "Product branding with star ratings and wishlist functionality.",
+                props: [
+                    { name: "wishlist", type: "boolean" },
+                    { name: "brandName", type: "boolean" }
+                ],
+                filePath: "src/components/ProductBrandRating.tsx",
+                mapped: true,
+                preview: <ProductBrandRating wishlist={true} brandName={true} />
+            },
+            {
+                name: "Icon with Text",
+                dataName: "icon with text",
+                description: "Icon and text combinations for various UI elements.",
+                props: [
+                    { name: "icon", type: "boolean" }
+                ],
+                filePath: "src/components/IconWithText.tsx",
+                mapped: true,
+                preview: <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}><IconWithText icon={true} /><IconWithText icon={false} /></div>
+            },
+            {
+                name: "Card Selector",
+                dataName: "card selector",
+                description: "Selectable card components with icons and pricing information.",
+                props: [
+                    { name: "state", type: "boolean (active/inactive)" },
+                    { name: "icon", type: "boolean" }
+                ],
+                filePath: "src/components/CardSelector.tsx",
+                mapped: true,
+                preview: <div style={{ display: 'flex', gap: '10px' }}><CardSelector state={false} icon={true} /><CardSelector state={true} icon={true} /></div>
+            },
+            {
+                name: "Size & Color Selector",
+                dataName: "size color selector",
+                description: "Product size and color selection dropdowns with optional size chart link.",
+                props: [
+                    { name: "sizeChart", type: "boolean" }
+                ],
+                filePath: "src/components/SizeColorSelector.tsx",
+                mapped: true,
+                preview: <SizeColorSelector sizeChart={true} />
+            },
+            {
+                name: "Product Price",
+                dataName: "product price",
+                description: "Price display component with strikeout and discount percentage options.",
+                props: [
+                    { name: "price", type: "string" },
+                    { name: "strikeoutPrice", type: "boolean" },
+                    { name: "discountPercentage", type: "boolean" }
+                ],
+                filePath: "src/components/ProductPrice.tsx",
+                mapped: true,
+                preview: <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}><ProductPrice /><ProductPrice price="$1,667" strikeoutPrice={true} /><ProductPrice price="$1,667" strikeoutPrice={true} discountPercentage={true} /></div>
+            },
+            {
+                name: "Star Rating",
+                dataName: "star rating",
+                description: "Star rating component with configurable rating (1-5 stars) and optional rating count.",
+                props: [
+                    { name: "ratingCount", type: "string" },
+                    { name: "starRating", type: '"1 star" | "2 star" | "3 star" | "4 star" | "5 star"' },
+                    { name: "ratingCount1", type: "boolean" }
+                ],
+                filePath: "src/components/StarRating.tsx",
+                mapped: false,
+                preview: <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}><StarRating /><StarRating starRating="3 star" /></div>
+            },
+            {
+                name: "Thumbnail Row",
+                dataName: "thumbnail row",
+                description: "Row of product thumbnails supporting 3 or 4 items with active state.",
+                props: [
+                    { name: "thumbnailCount", type: '"3" | "4"' }
+                ],
+                filePath: "src/components/ThumbnailRow.tsx",
+                mapped: true,
+                preview: <ThumbnailRow thumbnailCount="3" />
+            },
+            {
+                name: "Angle Right",
+                dataName: "angle right",
+                description: "Right navigation arrow icon in multiple sizes (40x40, 48x48, 56x56) with active/inactive states.",
+                props: [
+                    { name: "state", type: "boolean" },
+                    { name: "size", type: '"40x40" | "48x48" | "56x56"' }
+                ],
+                filePath: "src/components/AngleRight.tsx",
+                mapped: true,
+                preview: <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}><AngleRight size="40x40" /><AngleRight size="56x56" state={false} /></div>
+            },
+            {
+                name: "Angle Left",
+                dataName: "angle left",
+                description: "Left navigation arrow icon in multiple sizes (40x40, 48x48, 56x56) with active/inactive states.",
+                props: [
+                    { name: "state", type: "boolean" },
+                    { name: "size", type: '"40x40" | "48x48" | "56x56"' }
+                ],
+                filePath: "src/components/AngleLeft.tsx",
+                mapped: true,
+                preview: <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}><AngleLeft size="40x40" /><AngleLeft size="56x56" state={false} /></div>
+            },
+            {
+                name: "Product Media Section",
+                dataName: "product media section",
+                description: "Product image gallery with thumbnails and navigation arrows.",
+                props: [
+                    { name: "nav", type: "boolean" },
+                    { name: "thumbnailCount", type: '"3" | "4"' }
+                ],
+                filePath: "src/components/ProductMediaSection.tsx",
+                mapped: true,
+                preview: <ProductMediaSection nav={true} thumbnailCount="3" />
+            },
+            {
+                name: "Thumbnail",
+                dataName: "thumbnail",
+                description: "Individual thumbnail component with default and active states.",
+                props: [
+                    { name: "property1", type: '"Default" | "Active"' }
+                ],
+                filePath: "src/components/Thumbnail.tsx",
+                mapped: true,
+                preview: <div style={{ display: 'flex', gap: '10px' }}><Thumbnail property1="Default" /><Thumbnail property1="Active" /></div>
+            },
+            {
+                name: "Utility Links",
+                dataName: "utility links",
+                description: "Utility link icons supporting 1-6 items in a row.",
+                props: [
+                    { name: "utilityLinks", type: '"1" | "2" | "3" | "4" | "5" | "6"' }
+                ],
+                filePath: "src/components/UtilityLinks.tsx",
+                mapped: true,
+                preview: <UtilityLinks utilityLinks="3" />
+            },
+            {
+                name: "Links",
+                dataName: "links",
+                description: "Link components with optional icons and text, supporting various combinations.",
+                props: [
+                    { name: "icon", type: "boolean" },
+                    { name: "text", type: "boolean" }
+                ],
+                filePath: "src/components/Links.tsx",
+                mapped: false,
+                preview: <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}><Links icon={true} text={true} /><Links icon={false} text={true} /></div>
+            },
+            {
+                name: "Nav Menu",
+                dataName: "nav menu",
+                description: "Navigation menu component supporting 1-8 menu items.",
+                props: [
+                    { name: "navMenuCount", type: '"1" | "2" | "3" | "4" | "5" | "6" | "7" | "8"' }
+                ],
+                filePath: "src/components/NavMenu.tsx",
+                mapped: true,
+                preview: <NavMenu navMenuCount="4" />
+            },
+            {
+                name: "Menu",
+                dataName: "menu",
+                description: "Individual menu item component with default and variant styles.",
+                props: [
+                    { name: "property1", type: '"Default" | "Variant2"' }
+                ],
+                filePath: "src/components/Menu.tsx",
+                mapped: true,
+                preview: <div style={{ display: 'flex', gap: '10px' }}><Menu property1="Default" /><Menu property1="Variant2" /></div>
+            },
+            {
+                name: "Breadcrumbs",
+                dataName: "breadcrumbs",
+                description: "Breadcrumb navigation component showing hierarchical navigation path.",
+                props: [
+                    { name: "No props", type: "(static component)" }
+                ],
+                filePath: "src/components/Breadcrumbs.tsx",
+                mapped: true,
+                preview: <Breadcrumbs />
+            },
+            {
+                name: "Header Base",
+                dataName: "header base",
+                description: "Header component with logo alignment options (left or center) and navigation elements.",
+                props: [
+                    { name: "logoAlign", type: '"left" | "center"' }
+                ],
+                filePath: "src/components/HeaderBase.tsx",
+                mapped: true,
+                preview: <HeaderBase logoAlign="left" />
+            },
+            {
+                name: "Dropdown",
+                dataName: "dropdown",
+                description: "Dropdown select component with chevron icon indicator.",
+                props: [
+                    { name: "No props", type: "(static component)" }
+                ],
+                filePath: "src/components/Dropdown.tsx",
+                mapped: true,
+                preview: <Dropdown />
+            }
+        ];
+
+        // Component Card Component
+        const ComponentCard = ({ component }) => {
+            return (
+                <div className="component-card" data-name={component.dataName}>
+                    <div className="component-header">
+                        <div className="component-name">{component.name}</div>
+                        <div className="component-badge">{component.mapped ? "Mapped" : "Not Mapped*"}</div>
+                    </div>
+                    <div className="component-preview">
+                        {component.preview}
+                    </div>
+                    <div className="component-description">
+                        {component.description}
+                    </div>
+                    <div className="component-props">
+                        <div className="props-title">Props</div>
+                        <ul className="props-list">
+                            {component.props.map((prop, i) => (
+                                <li key={i}><strong>{prop.name}:</strong> {prop.type}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="file-path">{component.filePath}</div>
+                </div>
+            );
+        };
+
+        // Main App
+        const App = () => {
+            const [searchTerm, setSearchTerm] = useState('');
+
+            const filteredComponents = components.filter(comp => {
+                const term = searchTerm.toLowerCase();
+                return comp.name.toLowerCase().includes(term) ||
+                       comp.description.toLowerCase().includes(term) ||
+                       comp.filePath.toLowerCase().includes(term);
             });
 
-            // Show no results message if needed
-            let noResultsMsg = document.querySelector('.no-results');
-            if (visibleCount === 0 && searchTerm !== '') {
-                if (!noResultsMsg) {
-                    noResultsMsg = document.createElement('div');
-                    noResultsMsg.className = 'no-results';
-                    noResultsMsg.textContent = `No components found matching "${searchTerm}"`;
-                    componentsGrid.appendChild(noResultsMsg);
-                }
-            } else {
-                if (noResultsMsg) {
-                    noResultsMsg.remove();
-                }
-            }
-        });
+            return (
+                <>
+                    <div className="search-box">
+                        <input
+                            type="text"
+                            className="search-input"
+                            placeholder="Search components..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+                    <div className="components-grid">
+                        {filteredComponents.length > 0 ? (
+                            filteredComponents.map((comp, i) => (
+                                <ComponentCard key={i} component={comp} />
+                            ))
+                        ) : (
+                            <div className="no-results">
+                                No components found matching "{searchTerm}"
+                            </div>
+                        )}
+                    </div>
+                </>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('app-root'));
+    </script>
+
+    <script>
+        // Move the search functionality to work with React
+        // This is handled by React now
     </script>
 </body>
 </html>
