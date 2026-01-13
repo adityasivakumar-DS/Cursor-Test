@@ -26,6 +26,13 @@ This library includes the following components:
 - **Header Base** - Header component with logo alignment options
 - **Dropdown** - Dropdown select component
 
+## Component Showcase
+
+View all components in the interactive HTML showcase page:
+- Open `components.html` in your browser to see all 20 components with their props, descriptions, and file paths
+- Features search functionality to quickly find components
+- Shows Code Connect mapping status for each component
+
 ## Setup
 
 ```bash
