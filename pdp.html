@@ -19,29 +19,58 @@
         }
 
         :root {
-            --color/text/accent: #cf0;
-            --color/text/primary: white;
-            --color/text/secondary: #9ca3af;
-            --color/bg/primary: #030712;
-            --color/bg/tertiary: #1f2937;
-            --fontsize/xs: 12px;
-            --fontsize/sm: 14px;
-            --fontsize/body: 16px;
-            --fontsize/h4: 24px;
-            --fontsize/h5: 20px;
-            --fontsize/h2: 36px;
-            --fontfamily/body: "Inter:Regular", sans-serif;
-            --spacing/m: 8px;
-            --spacing/lg: 12px;
-            --spacing/xl: 16px;
-            --spacing/2xl: 24px;
-            --grid/5-column: 546px;
+            /* Colors from Value.tokens.json */
+            --color-bg-primary: #030712;
+            --color-bg-secondary: #111827;
+            --color-bg-tertiary: #1F2937;
+            --color-text-primary: #FFFFFF;
+            --color-text-secondary: #9CA3AF;
+            --color-text-accent: #CCFF00;
+            --color-brand-primary: #CCFF00;
+            
+            /* Spacing from Value.tokens.json */
+            --spacing-xs: 0px;
+            --spacing-s: 4px;
+            --spacing-m: 8px;
+            --spacing-lg: 12px;
+            --spacing-xl: 16px;
+            --spacing-2xl: 24px;
+            --spacing-3xl: 32px;
+            --spacing-4xl: 48px;
+            --spacing-5xl: 64px;
+            
+            /* FontSize from Value.tokens.json */
+            --fontsize-xs: 12px;
+            --fontsize-sm: 14px;
+            --fontsize-body: 16px;
+            --fontsize-h6: 18px;
+            --fontsize-h5: 20px;
+            --fontsize-h4: 24px;
+            --fontsize-h3: 30px;
+            --fontsize-h2: 36px;
+            --fontsize-h1: 60px;
+            
+            /* FontWeight from Value.tokens.json */
+            --fontweight-body: 400;
+            --fontweight-heading: 700;
+            --fontweight-button: 700;
+            
+            /* FontFamily from Value.tokens.json */
+            --fontfamily-heading: "Inter", sans-serif;
+            --fontfamily-body: "Inter", sans-serif;
+            
+            /* BorderRadius from Value.tokens.json */
+            --borderradius-card: 12px;
+            --borderradius-button: 4px;
+            
+            /* Grid from global.tokens.json */
+            --grid-5-column: 546px;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: var(--color/bg/primary);
-            color: var(--color/text/primary);
+            font-family: var(--fontfamily-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
             line-height: 1.6;
         }
 
@@ -58,8 +87,8 @@
 
         .main-layout {
             display: flex;
-            gap: var(--spacing/xl);
-            padding: var(--spacing/2xl) 40px;
+            gap: var(--spacing-xl);
+            padding: var(--spacing-2xl) 40px;
             width: 100%;
         }
 
@@ -73,13 +102,14 @@
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            gap: var(--spacing/xl);
+            gap: var(--spacing-xl);
         }
 
         .product-title {
-            font-size: var(--fontsize/h2);
-            font-weight: 700;
-            color: var(--color/text/primary);
+            font-size: var(--fontsize-h2);
+            font-weight: var(--fontweight-heading);
+            font-family: var(--fontfamily-heading);
+            color: var(--color-text-primary);
             margin: 0;
             line-height: 1.2;
         }
@@ -87,7 +117,7 @@
         @media (max-width: 768px) {
             .main-layout {
                 flex-direction: column;
-                padding: var(--spacing/xl) 20px;
+                padding: var(--spacing-xl) 20px;
             }
 
             .left-column,
@@ -114,41 +144,41 @@
             
             return (
                 <div style={{
-                    background: 'var(--color/bg/primary)',
+                    background: 'var(--color-bg-primary)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '24px 40px',
+                    padding: `${getComputedStyle(document.documentElement).getPropertyValue('--spacing-2xl')} 40px`,
                     width: '100%'
                 }}>
                     <div style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '24px'
+                        gap: 'var(--spacing-2xl)'
                     }}>
-                        {isLeft && <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#ffffff' }}>LOGO</div>}
+                        {isLeft && <div style={{ fontSize: 'var(--fontsize-h5)', fontWeight: 'var(--fontweight-heading)', color: 'var(--color-text-primary)' }}>LOGO</div>}
                         {isLeft && (
                             <>
-                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Home</span>
-                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Products</span>
-                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>About</span>
-                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Contact</span>
+                                <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)', cursor: 'pointer' }}>Home</span>
+                                <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)', cursor: 'pointer' }}>Products</span>
+                                <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)', cursor: 'pointer' }}>About</span>
+                                <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)', cursor: 'pointer' }}>Contact</span>
                             </>
                         )}
                         {isCenter && (
                             <>
-                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Home</span>
-                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Products</span>
-                                <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#ffffff' }}>LOGO</div>
-                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>About</span>
-                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Contact</span>
+                                <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)', cursor: 'pointer' }}>Home</span>
+                                <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)', cursor: 'pointer' }}>Products</span>
+                                <div style={{ fontSize: 'var(--fontsize-h5)', fontWeight: 'var(--fontweight-heading)', color: 'var(--color-text-primary)' }}>LOGO</div>
+                                <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)', cursor: 'pointer' }}>About</span>
+                                <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)', cursor: 'pointer' }}>Contact</span>
                             </>
                         )}
                     </div>
-                    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                        <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>🔍</span>
-                        <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>🛒</span>
-                        <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>👤</span>
+                    <div style={{ display: 'flex', gap: 'var(--spacing-xl)', alignItems: 'center' }}>
+                        <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)', cursor: 'pointer' }}>🔍</span>
+                        <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)', cursor: 'pointer' }}>🛒</span>
+                        <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)', cursor: 'pointer' }}>👤</span>
                     </div>
                 </div>
             );
@@ -158,11 +188,11 @@
         const Breadcrumbs = () => (
             <div style={{
                 display: 'flex',
-                gap: '16px',
+                gap: 'var(--spacing-xl)',
                 alignItems: 'center',
-                padding: '8px 0',
-                fontSize: '12px',
-                color: 'var(--color/text/secondary)'
+                padding: `${getComputedStyle(document.documentElement).getPropertyValue('--spacing-m')} 0`,
+                fontSize: 'var(--fontsize-xs)',
+                color: 'var(--color-text-secondary)'
             }}>
                 <span>Home</span>
                 <span>/</span>
@@ -170,7 +200,7 @@
                 <span>/</span>
                 <span>Category</span>
                 <span>/</span>
-                <span style={{ color: 'var(--color/text/primary)' }}>Product Name</span>
+                <span style={{ color: 'var(--color-text-primary)' }}>Product Name</span>
             </div>
         );
 
@@ -185,12 +215,12 @@
             ];
             
             return (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-m)', width: '100%' }}>
                     <div style={{
                         width: '100%',
                         aspectRatio: '1 / 1',
                         background: images[activeImage],
-                        borderRadius: '8px',
+                        borderRadius: 'var(--borderradius-card)',
                         position: 'relative',
                         overflow: 'hidden'
                     }}>
@@ -200,7 +230,7 @@
                                     onClick={() => setActiveImage((prev) => (prev > 0 ? prev - 1 : images.length - 1))}
                                     style={{
                                         position: 'absolute',
-                                        left: '8px',
+                                        left: 'var(--spacing-m)',
                                         top: '50%',
                                         transform: 'translateY(-50%)',
                                         width: '40px',
@@ -208,9 +238,9 @@
                                         borderRadius: '50%',
                                         background: 'rgba(0, 0, 0, 0.5)',
                                         border: 'none',
-                                        color: '#ffffff',
+                                        color: 'var(--color-text-primary)',
                                         cursor: 'pointer',
-                                        fontSize: '20px',
+                                        fontSize: 'var(--fontsize-h5)',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center'
@@ -222,7 +252,7 @@
                                     onClick={() => setActiveImage((prev) => (prev < images.length - 1 ? prev + 1 : 0))}
                                     style={{
                                         position: 'absolute',
-                                        right: '8px',
+                                        right: 'var(--spacing-m)',
                                         top: '50%',
                                         transform: 'translateY(-50%)',
                                         width: '40px',
@@ -230,9 +260,9 @@
                                         borderRadius: '50%',
                                         background: 'rgba(0, 0, 0, 0.5)',
                                         border: 'none',
-                                        color: '#ffffff',
+                                        color: 'var(--color-text-primary)',
                                         cursor: 'pointer',
-                                        fontSize: '20px',
+                                        fontSize: 'var(--fontsize-h5)',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center'
@@ -243,7 +273,7 @@
                             </>
                         )}
                     </div>
-                    <div style={{ display: 'flex', gap: '8px', width: '100%' }}>
+                    <div style={{ display: 'flex', gap: 'var(--spacing-m)', width: '100%' }}>
                         {images.map((img, index) => (
                             <div
                                 key={index}
@@ -252,9 +282,9 @@
                                     flex: 1,
                                     aspectRatio: '1 / 1',
                                     background: img,
-                                    borderRadius: '4px',
+                                    borderRadius: 'var(--borderradius-button)',
                                     cursor: 'pointer',
-                                    border: activeImage === index ? '2px solid white' : 'none',
+                                    border: activeImage === index ? `2px solid var(--color-text-primary)` : 'none',
                                     opacity: activeImage === index ? 1 : 0.7,
                                     transition: 'all 0.3s ease'
                                 }}
@@ -267,18 +297,18 @@
 
         // Product Brand Rating Component
         const ProductBrandRating = ({ wishlist = true, brandName = true }) => (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-xl)', width: '100%' }}>
                 {(brandName || wishlist) && (
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                        {brandName && <span style={{ fontSize: '12px', color: '#ffffff' }}>Brand Name</span>}
+                        {brandName && <span style={{ fontSize: 'var(--fontsize-xs)', color: 'var(--color-text-primary)' }}>Brand Name</span>}
                         {wishlist && (
                             <button style={{
                                 background: 'none',
                                 border: 'none',
-                                color: '#ffffff',
-                                fontSize: '24px',
+                                color: 'var(--color-text-primary)',
+                                fontSize: 'var(--fontsize-h4)',
                                 cursor: 'pointer',
-                                padding: '4px'
+                                padding: 'var(--spacing-s)'
                             }}>
                                 ♡
                             </button>
@@ -287,21 +317,21 @@
                 )}
                 <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                     {[1, 2, 3, 4, 5].map(i => (
-                        <span key={i} style={{ color: '#ccff00', fontSize: '16px' }}>★</span>
+                        <span key={i} style={{ color: 'var(--color-text-accent)', fontSize: 'var(--fontsize-body)' }}>★</span>
                     ))}
-                    <span style={{ fontSize: '16px', marginLeft: '4px' }}>786</span>
+                    <span style={{ fontSize: 'var(--fontsize-body)', marginLeft: 'var(--spacing-s)' }}>786</span>
                 </div>
             </div>
         );
 
         // Product Price Component
         const ProductPrice = ({ price = "$2,223", strikeoutPrice = false, discountPercentage = false }) => (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', height: '36px' }}>
-                <span style={{ fontSize: '36px', color: '#ffffff', fontWeight: 'normal' }}>{price}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-xl)', height: '36px' }}>
+                <span style={{ fontSize: 'var(--fontsize-h2)', color: 'var(--color-text-primary)', fontWeight: 'var(--fontweight-body)' }}>{price}</span>
                 {strikeoutPrice && (
                     <>
-                        <span style={{ fontSize: '24px', textDecoration: 'line-through', color: '#9ca3af' }}>$2,223</span>
-                        {discountPercentage && <span style={{ fontSize: '24px', color: '#ffffff' }}>25%</span>}
+                        <span style={{ fontSize: 'var(--fontsize-h4)', textDecoration: 'line-through', color: 'var(--color-text-secondary)' }}>$2,223</span>
+                        {discountPercentage && <span style={{ fontSize: 'var(--fontsize-h4)', color: 'var(--color-text-primary)' }}>25%</span>}
                     </>
                 )}
             </div>
@@ -309,38 +339,38 @@
 
         // Size & Color Selector Component
         const SizeColorSelector = ({ sizeChart = true }) => (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-2xl)', width: '100%' }}>
                 {sizeChart && (
-                    <a href="#" style={{ fontSize: '16px', textDecoration: 'underline', color: '#ffffff', cursor: 'pointer' }}>
+                    <a href="#" style={{ fontSize: 'var(--fontsize-body)', textDecoration: 'underline', color: 'var(--color-text-primary)', cursor: 'pointer' }}>
                         Size chart
                     </a>
                 )}
-                <div style={{ display: 'flex', gap: '16px', width: '100%' }}>
+                <div style={{ display: 'flex', gap: 'var(--spacing-xl)', width: '100%' }}>
                     <div style={{
-                        background: '#1f2937',
+                        background: 'var(--color-bg-tertiary)',
                         borderRadius: '32px',
-                        padding: '12px 16px',
+                        padding: `${getComputedStyle(document.documentElement).getPropertyValue('--spacing-lg')} var(--spacing-xl)`,
                         flex: 1,
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
                         cursor: 'pointer'
                     }}>
-                        <span style={{ fontSize: '16px', color: '#ffffff' }}>Size</span>
-                        <span style={{ fontSize: '16px', color: '#ffffff' }}>▼</span>
+                        <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)' }}>Size</span>
+                        <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)' }}>▼</span>
                     </div>
                     <div style={{
-                        background: '#1f2937',
+                        background: 'var(--color-bg-tertiary)',
                         borderRadius: '32px',
-                        padding: '12px 16px',
+                        padding: `${getComputedStyle(document.documentElement).getPropertyValue('--spacing-lg')} var(--spacing-xl)`,
                         flex: 1,
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
                         cursor: 'pointer'
                     }}>
-                        <span style={{ fontSize: '16px', color: '#ffffff' }}>Color</span>
-                        <span style={{ fontSize: '16px', color: '#ffffff' }}>▼</span>
+                        <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)' }}>Color</span>
+                        <span style={{ fontSize: 'var(--fontsize-body)', color: 'var(--color-text-primary)' }}>▼</span>
                     </div>
                 </div>
             </div>
@@ -349,43 +379,43 @@
         // Card Selector Component
         const CardSelector = ({ state = false, icon = true }) => (
             <div style={{
-                background: '#1f2937',
-                border: state ? '1px solid white' : 'none',
+                background: 'var(--color-bg-tertiary)',
+                border: state ? `1px solid var(--color-text-primary)` : 'none',
                 borderRadius: '40px',
-                padding: '16px',
+                padding: 'var(--spacing-xl)',
                 width: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '12px',
+                gap: 'var(--spacing-lg)',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease'
             }}>
                 {icon && (
                     <div style={{
-                        background: 'white',
+                        background: 'var(--color-text-primary)',
                         borderRadius: '40px',
-                        padding: '8px',
+                        padding: 'var(--spacing-m)',
                         width: '40px',
                         height: '40px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: '#030712',
-                        fontSize: '20px'
+                        color: 'var(--color-bg-primary)',
+                        fontSize: 'var(--fontsize-h5)'
                     }}>
                         $
                     </div>
                 )}
-                <div style={{ fontSize: '14px', color: '#ffffff' }}>To order</div>
-                <div style={{ fontSize: '20px', fontWeight: '600', color: '#ffffff' }}>$1,120</div>
+                <div style={{ fontSize: 'var(--fontsize-sm)', color: 'var(--color-text-primary)' }}>To order</div>
+                <div style={{ fontSize: 'var(--fontsize-h5)', fontWeight: '600', color: 'var(--color-text-primary)' }}>$1,120</div>
             </div>
         );
 
         // Icon with Text Component
         const IconWithText = ({ icon = false }) => (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '14px', color: '#ffffff' }}>To order</span>
-                {!icon && <span style={{ fontSize: '20px' }}>🚚</span>}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-m)' }}>
+                <span style={{ fontSize: 'var(--fontsize-sm)', color: 'var(--color-text-primary)' }}>To order</span>
+                {!icon && <span style={{ fontSize: 'var(--fontsize-h5)' }}>🚚</span>}
             </div>
         );
 
@@ -400,16 +430,17 @@
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '12px 16px',
+                    padding: `${getComputedStyle(document.documentElement).getPropertyValue('--spacing-lg')} var(--spacing-xl)`,
                     borderRadius: '32px',
-                    backgroundColor: isPrimary ? '#cf0' : isHyperlink ? 'transparent' : 'transparent',
+                    backgroundColor: isPrimary ? 'var(--color-text-accent)' : isHyperlink ? 'transparent' : 'transparent',
                     border: isSecondary ? '1px solid #5514b4' : 'none',
                     gap: icon ? '9px' : '0',
-                    color: isPrimary ? '#030712' : isSecondary || isHyperlink ? '#5514b4' : '#ffffff',
+                    color: isPrimary ? 'var(--color-bg-primary)' : isSecondary || isHyperlink ? '#5514b4' : 'var(--color-text-primary)',
                     textDecoration: isHyperlink ? 'underline' : 'none',
                     cursor: 'pointer',
-                    fontSize: '14px',
-                    fontWeight: 'normal',
+                    fontSize: 'var(--fontsize-sm)',
+                    fontWeight: 'var(--fontweight-button)',
+                    fontFamily: 'var(--fontfamily-body)',
                     width: '100%',
                     transition: 'all 0.3s ease'
                 }}
@@ -420,7 +451,7 @@
                     if (isPrimary) e.target.style.opacity = '1';
                 }}
                 >
-                    {icon && <span style={{ fontSize: '14px' }}>✓</span>}
+                    {icon && <span style={{ fontSize: 'var(--fontsize-sm)' }}>✓</span>}
                     <span>Add to Cart</span>
                 </button>
             );
