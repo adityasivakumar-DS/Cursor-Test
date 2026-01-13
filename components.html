@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Library - Cursor Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #030712 0%, #1f2937 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #cf0 0%, #5514b4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #9ca3af;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #cf0;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            margin-top: 5px;
+        }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .component-card {
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .component-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(207, 255, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(207, 255, 0, 0.1);
+        }
+
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .component-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .component-badge {
+            background: rgba(207, 255, 0, 0.2);
+            color: #cf0;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .component-description {
+            color: #9ca3af;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .component-props {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .props-title {
+            font-size: 0.85rem;
+            color: #cf0;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .props-list {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .props-list li {
+            padding: 5px 0;
+            color: #d1d5db;
+        }
+
+        .props-list li strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .file-path {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            margin-top: 10px;
+            word-break: break-all;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #cf0;
+            box-shadow: 0 0 0 3px rgba(207, 255, 0, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: #6b7280;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            color: #9ca3af;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #9ca3af;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .components-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Component Library</h1>
+            <p class="subtitle">Figma Design System Components with Code Connect Integration</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">20</div>
+                    <div class="stat-label">Components</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">18</div>
+                    <div class="stat-label">Code Connected</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">TypeScript</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search components...">
+        </div>
+
+        <div class="components-grid" id="componentsGrid">
+            <!-- Button -->
+            <div class="component-card" data-name="button">
+                <div class="component-header">
+                    <div class="component-name">Button</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Primary, Secondary, and Hyperlink button variants with optional icons.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>type:</strong> "Primary" | "Secondary" | "Hyperlink"</li>
+                        <li><strong>icon:</strong> boolean</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/Button.tsx</div>
+            </div>
+
+            <!-- Product Brand Rating -->
+            <div class="component-card" data-name="product brand rating">
+                <div class="component-header">
+                    <div class="component-name">Product Brand Rating</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Product branding with star ratings and wishlist functionality.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>wishlist:</strong> boolean</li>
+                        <li><strong>brandName:</strong> boolean</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/ProductBrandRating.tsx</div>
+            </div>
+
+            <!-- Icon with Text -->
+            <div class="component-card" data-name="icon with text">
+                <div class="component-header">
+                    <div class="component-name">Icon with Text</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Icon and text combinations for various UI elements.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>icon:</strong> boolean</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/IconWithText.tsx</div>
+            </div>
+
+            <!-- Card Selector -->
+            <div class="component-card" data-name="card selector">
+                <div class="component-header">
+                    <div class="component-name">Card Selector</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Selectable card components with icons and pricing information.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>state:</strong> boolean (active/inactive)</li>
+                        <li><strong>icon:</strong> boolean</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/CardSelector.tsx</div>
+            </div>
+
+            <!-- Size & Color Selector -->
+            <div class="component-card" data-name="size color selector">
+                <div class="component-header">
+                    <div class="component-name">Size & Color Selector</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Product size and color selection dropdowns with optional size chart link.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>sizeChart:</strong> boolean</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/SizeColorSelector.tsx</div>
+            </div>
+
+            <!-- Product Price -->
+            <div class="component-card" data-name="product price">
+                <div class="component-header">
+                    <div class="component-name">Product Price</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Price display component with strikeout and discount percentage options.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>price:</strong> string</li>
+                        <li><strong>strikeoutPrice:</strong> boolean</li>
+                        <li><strong>discountPercentage:</strong> boolean</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/ProductPrice.tsx</div>
+            </div>
+
+            <!-- Star Rating -->
+            <div class="component-card" data-name="star rating">
+                <div class="component-header">
+                    <div class="component-name">Star Rating</div>
+                    <div class="component-badge">Not Mapped*</div>
+                </div>
+                <div class="component-description">
+                    Star rating component with configurable rating (1-5 stars) and optional rating count.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>ratingCount:</strong> string</li>
+                        <li><strong>starRating:</strong> "1 star" | "2 star" | "3 star" | "4 star" | "5 star"</li>
+                        <li><strong>ratingCount1:</strong> boolean</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/StarRating.tsx</div>
+            </div>
+
+            <!-- Thumbnail Row -->
+            <div class="component-card" data-name="thumbnail row">
+                <div class="component-header">
+                    <div class="component-name">Thumbnail Row</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Row of product thumbnails supporting 3 or 4 items with active state.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>thumbnailCount:</strong> "3" | "4"</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/ThumbnailRow.tsx</div>
+            </div>
+
+            <!-- Angle Right -->
+            <div class="component-card" data-name="angle right">
+                <div class="component-header">
+                    <div class="component-name">Angle Right</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Right navigation arrow icon in multiple sizes (40x40, 48x48, 56x56) with active/inactive states.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>state:</strong> boolean</li>
+                        <li><strong>size:</strong> "40x40" | "48x48" | "56x56"</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/AngleRight.tsx</div>
+            </div>
+
+            <!-- Angle Left -->
+            <div class="component-card" data-name="angle left">
+                <div class="component-header">
+                    <div class="component-name">Angle Left</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Left navigation arrow icon in multiple sizes (40x40, 48x48, 56x56) with active/inactive states.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>state:</strong> boolean</li>
+                        <li><strong>size:</strong> "40x40" | "48x48" | "56x56"</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/AngleLeft.tsx</div>
+            </div>
+
+            <!-- Product Media Section -->
+            <div class="component-card" data-name="product media section">
+                <div class="component-header">
+                    <div class="component-name">Product Media Section</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Product image gallery with thumbnails and navigation arrows.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>nav:</strong> boolean</li>
+                        <li><strong>thumbnailCount:</strong> "3" | "4"</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/ProductMediaSection.tsx</div>
+            </div>
+
+            <!-- Thumbnail -->
+            <div class="component-card" data-name="thumbnail">
+                <div class="component-header">
+                    <div class="component-name">Thumbnail</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Individual thumbnail component with default and active states.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>property1:</strong> "Default" | "Active"</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/Thumbnail.tsx</div>
+            </div>
+
+            <!-- Utility Links -->
+            <div class="component-card" data-name="utility links">
+                <div class="component-header">
+                    <div class="component-name">Utility Links</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Utility link icons supporting 1-6 items in a row.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>utilityLinks:</strong> "1" | "2" | "3" | "4" | "5" | "6"</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/UtilityLinks.tsx</div>
+            </div>
+
+            <!-- Links -->
+            <div class="component-card" data-name="links">
+                <div class="component-header">
+                    <div class="component-name">Links</div>
+                    <div class="component-badge">Not Mapped*</div>
+                </div>
+                <div class="component-description">
+                    Link components with optional icons and text, supporting various combinations.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>icon:</strong> boolean</li>
+                        <li><strong>text:</strong> boolean</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/Links.tsx</div>
+            </div>
+
+            <!-- Nav Menu -->
+            <div class="component-card" data-name="nav menu">
+                <div class="component-header">
+                    <div class="component-name">Nav Menu</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Navigation menu component supporting 1-8 menu items.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>navMenuCount:</strong> "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8"</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/NavMenu.tsx</div>
+            </div>
+
+            <!-- Menu -->
+            <div class="component-card" data-name="menu">
+                <div class="component-header">
+                    <div class="component-name">Menu</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Individual menu item component with default and variant styles.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>property1:</strong> "Default" | "Variant2"</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/Menu.tsx</div>
+            </div>
+
+            <!-- Breadcrumbs -->
+            <div class="component-card" data-name="breadcrumbs">
+                <div class="component-header">
+                    <div class="component-name">Breadcrumbs</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Breadcrumb navigation component showing hierarchical navigation path.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li>No props (static component)</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/Breadcrumbs.tsx</div>
+            </div>
+
+            <!-- Header Base -->
+            <div class="component-card" data-name="header base">
+                <div class="component-header">
+                    <div class="component-name">Header Base</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Header component with logo alignment options (left or center) and navigation elements.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li><strong>logoAlign:</strong> "left" | "center"</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/HeaderBase.tsx</div>
+            </div>
+
+            <!-- Dropdown -->
+            <div class="component-card" data-name="dropdown">
+                <div class="component-header">
+                    <div class="component-name">Dropdown</div>
+                    <div class="component-badge">Mapped</div>
+                </div>
+                <div class="component-description">
+                    Dropdown select component with chevron icon indicator.
+                </div>
+                <div class="component-props">
+                    <div class="props-title">Props</div>
+                    <ul class="props-list">
+                        <li>No props (static component)</li>
+                    </ul>
+                </div>
+                <div class="file-path">src/components/Dropdown.tsx</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>* Components marked as "Not Mapped" are not published components in Figma and cannot be mapped with Code Connect.</p>
+            <p style="margin-top: 10px;">All components are built with React, TypeScript, and Tailwind CSS.</p>
+            <p style="margin-top: 10px; color: #6b7280;">Repository: <a href="https://github.com/adityasivakumar-DS/Cursor-Test.git" style="color: #cf0; text-decoration: none;">github.com/adityasivakumar-DS/Cursor-Test</a></p>
+        </div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const componentsGrid = document.getElementById('componentsGrid');
+        const componentCards = document.querySelectorAll('.component-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            let visibleCount = 0;
+            
+            componentCards.forEach(card => {
+                const componentName = card.getAttribute('data-name').toLowerCase();
+                const description = card.querySelector('.component-description').textContent.toLowerCase();
+                const filePath = card.querySelector('.file-path').textContent.toLowerCase();
+                
+                const matches = componentName.includes(searchTerm) || 
+                               description.includes(searchTerm) || 
+                               filePath.includes(searchTerm);
+                
+                if (matches || searchTerm === '') {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Show no results message if needed
+            let noResultsMsg = document.querySelector('.no-results');
+            if (visibleCount === 0 && searchTerm !== '') {
+                if (!noResultsMsg) {
+                    noResultsMsg = document.createElement('div');
+                    noResultsMsg.className = 'no-results';
+                    noResultsMsg.textContent = `No components found matching "${searchTerm}"`;
+                    componentsGrid.appendChild(noResultsMsg);
+                }
+            } else {
+                if (noResultsMsg) {
+                    noResultsMsg.remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
