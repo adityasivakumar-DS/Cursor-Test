@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail Page</title>
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel Standalone for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color/text/accent: #cf0;
+            --color/text/primary: white;
+            --color/text/secondary: #9ca3af;
+            --color/bg/primary: #030712;
+            --color/bg/tertiary: #1f2937;
+            --fontsize/xs: 12px;
+            --fontsize/sm: 14px;
+            --fontsize/body: 16px;
+            --fontsize/h4: 24px;
+            --fontsize/h5: 20px;
+            --fontsize/h2: 36px;
+            --fontfamily/body: "Inter:Regular", sans-serif;
+            --spacing/m: 8px;
+            --spacing/lg: 12px;
+            --spacing/xl: 16px;
+            --spacing/2xl: 24px;
+            --grid/5-column: 546px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--color/bg/primary);
+            color: var(--color/text/primary);
+            line-height: 1.6;
+        }
+
+        .pdp-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .header-region {
+            width: 100%;
+            padding: 0 40px;
+        }
+
+        .main-layout {
+            display: flex;
+            gap: var(--spacing/xl);
+            padding: var(--spacing/2xl) 40px;
+            width: 100%;
+        }
+
+        .left-column {
+            width: 65%;
+            flex-shrink: 0;
+        }
+
+        .right-column {
+            width: 35%;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing/xl);
+        }
+
+        .product-title {
+            font-size: var(--fontsize/h2);
+            font-weight: 700;
+            color: var(--color/text/primary);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 768px) {
+            .main-layout {
+                flex-direction: column;
+                padding: var(--spacing/xl) 20px;
+            }
+
+            .left-column,
+            .right-column {
+                width: 100%;
+            }
+
+            .header-region {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="pdp-root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Header Base Component
+        const HeaderBase = ({ logoAlign = "left" }) => {
+            const isCenter = logoAlign === "center";
+            const isLeft = logoAlign === "left";
+            
+            return (
+                <div style={{
+                    background: 'var(--color/bg/primary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '24px 40px',
+                    width: '100%'
+                }}>
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '24px'
+                    }}>
+                        {isLeft && <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#ffffff' }}>LOGO</div>}
+                        {isLeft && (
+                            <>
+                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Home</span>
+                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Products</span>
+                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>About</span>
+                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Contact</span>
+                            </>
+                        )}
+                        {isCenter && (
+                            <>
+                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Home</span>
+                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Products</span>
+                                <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#ffffff' }}>LOGO</div>
+                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>About</span>
+                                <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>Contact</span>
+                            </>
+                        )}
+                    </div>
+                    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                        <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>🔍</span>
+                        <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>🛒</span>
+                        <span style={{ fontSize: '16px', color: '#ffffff', cursor: 'pointer' }}>👤</span>
+                    </div>
+                </div>
+            );
+        };
+
+        // Breadcrumbs Component
+        const Breadcrumbs = () => (
+            <div style={{
+                display: 'flex',
+                gap: '16px',
+                alignItems: 'center',
+                padding: '8px 0',
+                fontSize: '12px',
+                color: 'var(--color/text/secondary)'
+            }}>
+                <span>Home</span>
+                <span>/</span>
+                <span>Products</span>
+                <span>/</span>
+                <span>Category</span>
+                <span>/</span>
+                <span style={{ color: 'var(--color/text/primary)' }}>Product Name</span>
+            </div>
+        );
+
+        // Product Media Section Component
+        const ProductMediaSection = ({ nav = true, thumbnailCount = "4" }) => {
+            const [activeImage, setActiveImage] = useState(0);
+            const images = [
+                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
+            ];
+            
+            return (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%' }}>
+                    <div style={{
+                        width: '100%',
+                        aspectRatio: '1 / 1',
+                        background: images[activeImage],
+                        borderRadius: '8px',
+                        position: 'relative',
+                        overflow: 'hidden'
+                    }}>
+                        {nav && (
+                            <>
+                                <button
+                                    onClick={() => setActiveImage((prev) => (prev > 0 ? prev - 1 : images.length - 1))}
+                                    style={{
+                                        position: 'absolute',
+                                        left: '8px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        width: '40px',
+                                        height: '40px',
+                                        borderRadius: '50%',
+                                        background: 'rgba(0, 0, 0, 0.5)',
+                                        border: 'none',
+                                        color: '#ffffff',
+                                        cursor: 'pointer',
+                                        fontSize: '20px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    ←
+                                </button>
+                                <button
+                                    onClick={() => setActiveImage((prev) => (prev < images.length - 1 ? prev + 1 : 0))}
+                                    style={{
+                                        position: 'absolute',
+                                        right: '8px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        width: '40px',
+                                        height: '40px',
+                                        borderRadius: '50%',
+                                        background: 'rgba(0, 0, 0, 0.5)',
+                                        border: 'none',
+                                        color: '#ffffff',
+                                        cursor: 'pointer',
+                                        fontSize: '20px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    →
+                                </button>
+                            </>
+                        )}
+                    </div>
+                    <div style={{ display: 'flex', gap: '8px', width: '100%' }}>
+                        {images.map((img, index) => (
+                            <div
+                                key={index}
+                                onClick={() => setActiveImage(index)}
+                                style={{
+                                    flex: 1,
+                                    aspectRatio: '1 / 1',
+                                    background: img,
+                                    borderRadius: '4px',
+                                    cursor: 'pointer',
+                                    border: activeImage === index ? '2px solid white' : 'none',
+                                    opacity: activeImage === index ? 1 : 0.7,
+                                    transition: 'all 0.3s ease'
+                                }}
+                            />
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        // Product Brand Rating Component
+        const ProductBrandRating = ({ wishlist = true, brandName = true }) => (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+                {(brandName || wishlist) && (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                        {brandName && <span style={{ fontSize: '12px', color: '#ffffff' }}>Brand Name</span>}
+                        {wishlist && (
+                            <button style={{
+                                background: 'none',
+                                border: 'none',
+                                color: '#ffffff',
+                                fontSize: '24px',
+                                cursor: 'pointer',
+                                padding: '4px'
+                            }}>
+                                ♡
+                            </button>
+                        )}
+                    </div>
+                )}
+                <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                    {[1, 2, 3, 4, 5].map(i => (
+                        <span key={i} style={{ color: '#ccff00', fontSize: '16px' }}>★</span>
+                    ))}
+                    <span style={{ fontSize: '16px', marginLeft: '4px' }}>786</span>
+                </div>
+            </div>
+        );
+
+        // Product Price Component
+        const ProductPrice = ({ price = "$2,223", strikeoutPrice = false, discountPercentage = false }) => (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', height: '36px' }}>
+                <span style={{ fontSize: '36px', color: '#ffffff', fontWeight: 'normal' }}>{price}</span>
+                {strikeoutPrice && (
+                    <>
+                        <span style={{ fontSize: '24px', textDecoration: 'line-through', color: '#9ca3af' }}>$2,223</span>
+                        {discountPercentage && <span style={{ fontSize: '24px', color: '#ffffff' }}>25%</span>}
+                    </>
+                )}
+            </div>
+        );
+
+        // Size & Color Selector Component
+        const SizeColorSelector = ({ sizeChart = true }) => (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
+                {sizeChart && (
+                    <a href="#" style={{ fontSize: '16px', textDecoration: 'underline', color: '#ffffff', cursor: 'pointer' }}>
+                        Size chart
+                    </a>
+                )}
+                <div style={{ display: 'flex', gap: '16px', width: '100%' }}>
+                    <div style={{
+                        background: '#1f2937',
+                        borderRadius: '32px',
+                        padding: '12px 16px',
+                        flex: 1,
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        cursor: 'pointer'
+                    }}>
+                        <span style={{ fontSize: '16px', color: '#ffffff' }}>Size</span>
+                        <span style={{ fontSize: '16px', color: '#ffffff' }}>▼</span>
+                    </div>
+                    <div style={{
+                        background: '#1f2937',
+                        borderRadius: '32px',
+                        padding: '12px 16px',
+                        flex: 1,
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        cursor: 'pointer'
+                    }}>
+                        <span style={{ fontSize: '16px', color: '#ffffff' }}>Color</span>
+                        <span style={{ fontSize: '16px', color: '#ffffff' }}>▼</span>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Card Selector Component
+        const CardSelector = ({ state = false, icon = true }) => (
+            <div style={{
+                background: '#1f2937',
+                border: state ? '1px solid white' : 'none',
+                borderRadius: '40px',
+                padding: '16px',
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+            }}>
+                {icon && (
+                    <div style={{
+                        background: 'white',
+                        borderRadius: '40px',
+                        padding: '8px',
+                        width: '40px',
+                        height: '40px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#030712',
+                        fontSize: '20px'
+                    }}>
+                        $
+                    </div>
+                )}
+                <div style={{ fontSize: '14px', color: '#ffffff' }}>To order</div>
+                <div style={{ fontSize: '20px', fontWeight: '600', color: '#ffffff' }}>$1,120</div>
+            </div>
+        );
+
+        // Icon with Text Component
+        const IconWithText = ({ icon = false }) => (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '14px', color: '#ffffff' }}>To order</span>
+                {!icon && <span style={{ fontSize: '20px' }}>🚚</span>}
+            </div>
+        );
+
+        // Button Component
+        const Button = ({ type = "Primary", icon = true }) => {
+            const isPrimary = type === "Primary";
+            const isSecondary = type === "Secondary";
+            const isHyperlink = type === "Hyperlink";
+            
+            return (
+                <button style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '12px 16px',
+                    borderRadius: '32px',
+                    backgroundColor: isPrimary ? '#cf0' : isHyperlink ? 'transparent' : 'transparent',
+                    border: isSecondary ? '1px solid #5514b4' : 'none',
+                    gap: icon ? '9px' : '0',
+                    color: isPrimary ? '#030712' : isSecondary || isHyperlink ? '#5514b4' : '#ffffff',
+                    textDecoration: isHyperlink ? 'underline' : 'none',
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    fontWeight: 'normal',
+                    width: '100%',
+                    transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => {
+                    if (isPrimary) e.target.style.opacity = '0.9';
+                }}
+                onMouseOut={(e) => {
+                    if (isPrimary) e.target.style.opacity = '1';
+                }}
+                >
+                    {icon && <span style={{ fontSize: '14px' }}>✓</span>}
+                    <span>Add to Cart</span>
+                </button>
+            );
+        };
+
+        // Main PDP Component
+        const ProductDetailPage = () => {
+            return (
+                <div className="pdp-container">
+                    {/* Header Region */}
+                    <div className="header-region">
+                        <HeaderBase logoAlign="left" />
+                        <Breadcrumbs />
+                    </div>
+
+                    {/* Main Layout - Two Column */}
+                    <div className="main-layout">
+                        {/* Left Column - 65% */}
+                        <div className="left-column">
+                            <ProductMediaSection nav={true} thumbnailCount="4" />
+                        </div>
+
+                        {/* Right Column - 35% */}
+                        <div className="right-column">
+                            {/* Product brand rating - high priority */}
+                            <ProductBrandRating wishlist={true} brandName={true} />
+
+                            {/* product_title - high priority */}
+                            <h1 className="product-title">Premium Product Name</h1>
+
+                            {/* Product Price - high priority */}
+                            <ProductPrice price="$1,667" strikeoutPrice={true} discountPercentage={true} />
+
+                            {/* Size & Color Selector - high priority */}
+                            <SizeColorSelector sizeChart={true} />
+
+                            {/* Card Selector - medium priority */}
+                            <CardSelector state={false} icon={true} />
+
+                            {/* IconWithTextText - low priority */}
+                            <IconWithText icon={false} />
+
+                            {/* Button - high priority */}
+                            <Button type="Primary" icon={true} />
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Render the PDP
+        ReactDOM.render(<ProductDetailPage />, document.getElementById('pdp-root'));
+    </script>
+</body>
+</html>
