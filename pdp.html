@@ -208,10 +208,10 @@
         const ProductMediaSection = ({ nav = true, thumbnailCount = "4" }) => {
             const [activeImage, setActiveImage] = useState(0);
             const images = [
-                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-                'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
+                'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=800&fit=crop',
+                'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=800&fit=crop',
+                'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&h=800&fit=crop',
+                'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=800&fit=crop'
             ];
             
             return (
@@ -219,11 +219,21 @@
                     <div style={{
                         width: '100%',
                         aspectRatio: '1 / 1',
-                        background: images[activeImage],
                         borderRadius: 'var(--borderradius-card)',
                         position: 'relative',
-                        overflow: 'hidden'
+                        overflow: 'hidden',
+                        backgroundColor: 'var(--color-bg-tertiary)'
                     }}>
+                        <img 
+                            src={images[activeImage]} 
+                            alt={`Product view ${activeImage + 1}`}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                display: 'block'
+                            }}
+                        />
                         {nav && (
                             <>
                                 <button
@@ -243,7 +253,8 @@
                                         fontSize: 'var(--fontsize-h5)',
                                         display: 'flex',
                                         alignItems: 'center',
-                                        justifyContent: 'center'
+                                        justifyContent: 'center',
+                                        zIndex: 10
                                     }}
                                 >
                                     ←
@@ -265,7 +276,8 @@
                                         fontSize: 'var(--fontsize-h5)',
                                         display: 'flex',
                                         alignItems: 'center',
-                                        justifyContent: 'center'
+                                        justifyContent: 'center',
+                                        zIndex: 10
                                     }}
                                 >
                                     →
@@ -281,14 +293,26 @@
                                 style={{
                                     flex: 1,
                                     aspectRatio: '1 / 1',
-                                    background: img,
                                     borderRadius: 'var(--borderradius-button)',
                                     cursor: 'pointer',
                                     border: activeImage === index ? `2px solid var(--color-text-primary)` : 'none',
                                     opacity: activeImage === index ? 1 : 0.7,
-                                    transition: 'all 0.3s ease'
+                                    transition: 'all 0.3s ease',
+                                    overflow: 'hidden',
+                                    backgroundColor: 'var(--color-bg-tertiary)'
                                 }}
-                            />
+                            >
+                                <img 
+                                    src={img} 
+                                    alt={`Thumbnail ${index + 1}`}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover',
+                                        display: 'block'
+                                    }}
+                                />
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -488,8 +512,11 @@
                             {/* Size & Color Selector - high priority */}
                             <SizeColorSelector sizeChart={true} />
 
-                            {/* Card Selector - medium priority */}
-                            <CardSelector state={false} icon={true} />
+                            {/* Card Selector - medium priority - Horizontal Stack */}
+                            <div style={{ display: 'flex', gap: 'var(--spacing-xl)', width: '100%' }}>
+                                <CardSelector state={false} icon={true} />
+                                <CardSelector state={true} icon={true} />
+                            </div>
 
                             {/* IconWithTextText - low priority */}
                             <IconWithText icon={false} />
