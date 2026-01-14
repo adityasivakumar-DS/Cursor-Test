@@ -1,0 +1,58 @@
+{
+  "pattern_id": "pdp_page",
+  "intent": "Display product details with media gallery and purchase options",
+  "layout": "two_column_primary",
+  "regions": {
+    "header": [
+      {
+        "component": "HeaderBase",
+        "priority": "high"
+      }
+    ],
+    "navigation": [
+      {
+        "component": "Breadcrumbs",
+        "priority": "medium"
+      }
+    ],
+    "primary": [
+      {
+        "component": "ProductMediaSection",
+        "priority": "high"
+      }
+    ],
+    "secondary": [
+      {
+        "component": "ProductBrandRating",
+        "priority": "high"
+      },
+      {
+        "component": "ProductPrice",
+        "priority": "high"
+      },
+      {
+        "component": "SizeColorSelector",
+        "priority": "high"
+      },
+      {
+        "component": "CardSelector",
+        "priority": "medium"
+      },
+      {
+        "component": "IconWithText",
+        "priority": "low"
+      },
+      {
+        "component": "Button",
+        "priority": "high"
+      }
+    ]
+  },
+  "constraints": {
+    "must_have_cta": true,
+    "image_ratio": "4:3",
+    "thumbnail_count": 3,
+    "has_favorites": true,
+    "has_size_chart": true
+  }
+}
