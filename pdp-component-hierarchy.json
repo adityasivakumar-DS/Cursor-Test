@@ -1,0 +1,178 @@
+{
+  "name": "PdpPage",
+  "type": "page",
+  "children": [
+    {
+      "name": "HeaderBase",
+      "type": "component",
+      "children": [
+        {
+          "name": "Menu",
+          "type": "component",
+          "description": "Navigation menu items"
+        },
+        {
+          "name": "Logo",
+          "type": "image",
+          "description": "Brand logo image"
+        },
+        {
+          "name": "Container",
+          "type": "component",
+          "children": [
+            {
+              "name": "Icon",
+              "type": "icon",
+              "description": "Search icon"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Breadcrumbs",
+      "type": "component",
+      "description": "Navigation breadcrumbs"
+    },
+    {
+      "name": "ProductMediaSection",
+      "type": "component",
+      "children": [
+        {
+          "name": "MainProductImage",
+          "type": "image",
+          "description": "Primary product image"
+        },
+        {
+          "name": "Rectangle",
+          "type": "image",
+          "description": "Product thumbnails"
+        }
+      ]
+    },
+    {
+      "name": "ProductBrandRating",
+      "type": "component",
+      "children": [
+        {
+          "name": "BrandNameText",
+          "type": "text"
+        },
+        {
+          "name": "Heart",
+          "type": "icon",
+          "description": "Favorite/wishlist icon"
+        },
+        {
+          "name": "StarRating",
+          "type": "component",
+          "children": [
+            {
+              "name": "Vector",
+              "type": "icon",
+              "description": "Star rating icons"
+            },
+            {
+              "name": "RatingCount",
+              "type": "text",
+              "description": "Number of ratings"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ProductNameText",
+      "type": "text",
+      "description": "Product name goes here"
+    },
+    {
+      "name": "ProductPrice",
+      "type": "component",
+      "children": [
+        {
+          "name": "CurrentPrice",
+          "type": "text"
+        },
+        {
+          "name": "OriginalPrice",
+          "type": "text",
+          "description": "Strikethrough price"
+        },
+        {
+          "name": "DiscountPercentage",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "SizeColorSelector",
+      "type": "component",
+      "children": [
+        {
+          "name": "SizeChartLink",
+          "type": "text",
+          "description": "Underlined link"
+        },
+        {
+          "name": "Dropdown",
+          "type": "component",
+          "description": "Size and color selectors",
+          "children": [
+            {
+              "name": "DropdownLabel",
+              "type": "text"
+            },
+            {
+              "name": "ChevronDown",
+              "type": "icon"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AvailableOptionsText",
+      "type": "text"
+    },
+    {
+      "name": "CardSelector",
+      "type": "component",
+      "description": "Purchase option cards",
+      "children": [
+        {
+          "name": "Dollar",
+          "type": "icon"
+        },
+        {
+          "name": "ToOrderLabel",
+          "type": "text"
+        },
+        {
+          "name": "PriceText",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "IconWithText",
+      "type": "component",
+      "description": "Delivery information",
+      "children": [
+        {
+          "name": "Truck",
+          "type": "icon"
+        },
+        {
+          "name": "DeliveryText",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Button",
+      "type": "component",
+      "description": "Primary CTA button"
+    }
+  ]
+}
